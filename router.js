@@ -1,10 +1,10 @@
 const express = require('express');
-const {checkAge} = require('./user/user.controller');
+// const {  = require('./user/user.controller');
 const {filename} = require('./multer/addharcard');
 const  {sendMail} = require('./nodemailer/sendMail.js');
 const router = express.Router();
 
-router.get('/data',checkAge, async (req, res)=>{
+router.get('/data', async (req, res)=>{
      
     res.send("Data fetch successful..!");
 })

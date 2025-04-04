@@ -1,28 +1,51 @@
 const userSchema = require('./user.modal');
-async function checkAge(req, res, next) {
+const encryptPassword = require('./user.service');
 
-const { age } = req.query;
-
-    if( age < 18){
-          res.status(400).json({Message :"Your age is not able to access this service"})   
-        
-    }else if(age > 18 && age < 40){
-          res.status(200).json({Message: "Congratulation you are applicable for this service...!"});
-        
-    }else if(age > 40){
-        res.status(200).json({Message: "Your Old man dont do this",arr:[4,2]})
+async function getUser(req, res) {
+    try {
+        const get_user = await userSchema.find();
+        return res.status(200).json({ message: "Data fetch successfuly..!", get_user });
+    } catch (error) {
+        return res.status(404).json("Somthing went wrong..!")
     }
-    next()
 }
 
-exports.getUser = async((req, res)=>{
+async function addUser(req, res) {
+    const { userName, email, password} = req.body;
+     let encPassword = await encryptPassword(password);
+    try {
+        if (!userName || !email || !password) {
+            return res.status(400).send("All field are required..!");
+        } else {
+            const addUser = await userSchema.create({ userName, email, password:encPassword });
+            return res.status(200).json({ message: "Data added successfuly..!", addUser })
+        }
+    } catch (error) {
+        return res.status(404).json({ error: error.message })
+    }
+}
+
+async function updateUser(req, res) {
+    const {id} = req.params;
+    if(!id){
+        return res.status(400).send("Invalid Id Please try agian");  
+    }
+    const updateUser = await userSchema.findOneAndUpdate({_id: id}, req.body, {new: true});
+
+    return res.status(200).json("User Updated successfully..!", updateUser);
+
+}
  
-        const get_user = userSchema.find();
-        
 
-    
-    
-   
-})
+async function deleteUser(req, res) {
+    const { id } = req.params;
+    try{
+        await userSchema.findOneAndRemove({_id: id});
+        res.status(200).send("User Deleted Successfuly");
+    }catch(error){
+        return res.status(404).send("Somthing wend wrong")
+    }
 
- module.exports = {checkAge};
+}
+
+module.exports = { getUser, addUser, updateUser, deleteUser };
