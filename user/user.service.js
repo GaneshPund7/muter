@@ -1,12 +1,14 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const randomstring = require('randomstring');
 
 async function createToken(payload, seckretKey) {    
    let token = jwt.sign(payload, seckretKey, { expiresIn: '300' });
     return token;
 }
-async function verifyToken() {
-    
+
+async function verifyToken(token, seckretKey ) {
+    jwt.verify(token,seckretKey)    
 
 }
 
@@ -29,12 +31,20 @@ async function decryptpassword(password, encPassword) {
         return res.status(404).send("Somthing went wrong..!")
     }
 }
+
 async function forgetpassword() {
 
 }
 
-async function checkAge(req, res, next) {
+ function generateOTP() {
+    return randomstring.generate({
+        length: 6,
+        charset: 'numeric'
+    });
+}
 
+
+async function checkAge(req, res, next) {
     const { age } = req.query;
 
     if (age < 18) {
@@ -48,4 +58,4 @@ async function checkAge(req, res, next) {
     }
     next()
 }
-module.exports = { encryptPassword, decryptpassword, createToken }
+module.exports = { encryptPassword, decryptpassword, createToken ,generateOTP}

@@ -7,22 +7,26 @@ const createTransport = nodemailer.createTransport({
     secure: false,
     port: 587,
     auth: {
-        user: "chinmay.deolekar1@gmail.com",
-        pass: "vurx dywq jchy mxuy",
+        user: "ganesh.pund@nimapinfotech.in",
+        pass: "nlyt xcke kumx atlh",
     },
 });
- async function sendMail() {
+async function sendMail(email, password) {
     try {
-        const sendMail = await createTransport.sendMail({
-            to: "ganesh.pund@nimapinfotech.in",
-            from: "ganeshpund0000@gmail.com",
-            subject: "Hello Ganesh",
-            html: "<h4> Hello this is mail checking service</h4>",
+        await createTransport.sendMail({
+            to: email,
+            from: "ganesh.pund@nimapinfotech.in",
+            subject: "Nimap Infotech OTP",
+            html: `<p>Your user Name is ${email} and OTP is <b> ${password} </b></p>
+            <p> dont share otp with any one </p>
+            <p>thanks and regard </p>
+            <b>Nimap Infotech</b>`,
+
         })
     } catch (error) {
-        console.log("Mail not send ", error.message);
+        console.log("Mail not send", error.message);
 
     }
 }
 
-module.exports = {sendMail};
+module.exports = { sendMail };

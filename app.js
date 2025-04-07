@@ -3,6 +3,7 @@ dotenv.config();
  const mongoose = require('mongoose');
 const cluster = require('cluster');
 const express = require('express');
+const cors = require('cors');
 // const router = require('./router')
 const os = require('os');
 const bodyParser = require('body-parser');
@@ -15,7 +16,7 @@ console.log(PORT);
 const MONGOURL = process.env.MONGOURL
 console.log(MONGOURL);
 
-
+app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json())
 const cpus = os.cpus().length;

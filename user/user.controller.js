@@ -1,5 +1,9 @@
+const { sendMail } = require('../nodemailer/sendMail');
 const userSchema = require('./user.modal');
-const encryptPassword = require('./user.service');
+const otpSchema = require('../user-login/verify-user.modal');
+const {encryptPassword} = require('./user.service');
+const randomstring = require('randomstring');
+const { generateOTP } = require('./user.service');
 
 async function getUser(req, res) {
     try {
@@ -11,13 +15,13 @@ async function getUser(req, res) {
 }
 
 async function addUser(req, res) {
-    const { userName, email, password} = req.body;
-     let encPassword = await encryptPassword(password);
+    const { name, email, password } = req.body;
+    let encPassword = await encryptPassword(password);
     try {
-        if (!userName || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).send("All field are required..!");
         } else {
-            const addUser = await userSchema.create({ userName, email, password:encPassword });
+            const addUser = await userSchema.create({ name, email, password:encPassword});
             return res.status(200).json({ message: "Data added successfuly..!", addUser })
         }
     } catch (error) {
@@ -26,26 +30,63 @@ async function addUser(req, res) {
 }
 
 async function updateUser(req, res) {
-    const {id} = req.params;
-    if(!id){
-        return res.status(400).send("Invalid Id Please try agian");  
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).send("Invalid Id Please try agian");
     }
-    const updateUser = await userSchema.findOneAndUpdate({_id: id}, req.body, {new: true});
+    const updateUser = await userSchema.findOneAndUpdate({ _id: id }, req.body, { new: true });
 
     return res.status(200).json("User Updated successfully..!", updateUser);
 
 }
- 
 
 async function deleteUser(req, res) {
     const { id } = req.params;
-    try{
-        await userSchema.findOneAndRemove({_id: id});
+    try {
+        await userSchema.findOneAndRemove({ _id: id });
         res.status(200).send("User Deleted Successfuly");
-    }catch(error){
+    } catch (error) {
         return res.status(404).send("Somthing wend wrong")
     }
-
 }
 
-module.exports = { getUser, addUser, updateUser, deleteUser };
+async function forgetPassword(req, res) {
+    const { email } = req.body;
+    const get_user = await userSchema.findOne({ email });
+    const otp = generateOTP();
+    await otpSchema.create({ email, otp });
+    if (!get_user) {
+        res.status(404).json({ message: "Email is not found..." });
+    }
+    await sendMail(email, otp);
+    res.status(200).send("Password send on register mail");
+}
+
+async function verifyOtp(req, res) {
+    const { email, otp } = req.body;
+    try {
+        const verifyOtp = await otpSchema.findOneAndDelete({ email, otp });
+        if (verifyOtp) {
+            res.status(200).json({ success: true, message: "Otp verify successfully..!" });
+        } else {
+            res.status(400).json({ success: false, message: "Invalid opt please try again..!" });
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+async function updatePassword(req, res) {
+    const { email, password} = req.body;
+    let encPassword = await encryptPassword(password);
+    try {
+        const updatePassword = await userSchema.findOneAndUpdate({ email }, {password:encPassword}, { new: true });
+        if (updatePassword) {
+            return res.status(200).json({ message: "Password Updated successfully" });
+        }
+    } catch (error) {
+        return res.status(404).json( {message: "Somthing went wrong", error: error.message});
+    }
+}
+
+module.exports = { getUser, addUser, updateUser, deleteUser, forgetPassword, verifyOtp, updatePassword};
