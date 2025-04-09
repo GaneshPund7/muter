@@ -21,9 +21,9 @@ function hcf(a, b) {
         }
         i++;
     }
-    return hcfs
+    return hcfs;
 }
-// console.log(hcf(10, 15));
+console.log(hcf(10, 15));
 
 
 // Swap Values without using any variable a=10, b=12.
@@ -37,11 +37,16 @@ function swap() {
 }
 // swap()
 
+
+
+
+
+
 //  Find odd and even no
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function odd(a) {
-    let oddNo = []
-    let evenNo = []
+    let oddNo = [];
+    let evenNo = [];
     for (let i = 0; i < a.length; i++) {
         if (a[i] % 2 !== 0) {
             oddNo.push(a[i]);
@@ -144,6 +149,15 @@ function missingelement(arr2) {
 }
 newArray = missingelement(arr)
 newArray = newArray.concat(arr);
+
+
+
+// Find a common element from the array
+
+
+
+
+
 
 //  let sortArray = miss.sort();
 // sort array without using sort method 
@@ -251,7 +265,7 @@ function primeNo(data) {
 let data = [1, 2, 3, 4, 5, 7, 9, 4, 3];
 let primenoArr = primeNo(data)
 
-console.log(primenoArr);
+// console.log(primenoArr);
 
 function squaresOfFirstPrimeNo(num) {
     for (let i = 0; i <= num; i++) {
@@ -260,7 +274,7 @@ function squaresOfFirstPrimeNo(num) {
         }
     }
 }
-console.log(squaresOfFirstPrimeNo(primenoArr));
+// console.log(squaresOfFirstPrimeNo(primenoArr));
 
 // Find a prime number
 function isPrime(num) {
@@ -285,4 +299,35 @@ function sumOfPrimeSquares(n) {
     }
     return sum;
 }
-console.log(sumOfPrimeSquares(4));
+// console.log(sumOfPrimeSquares(4));
+
+ 
+//  [80, 60, 10, 50, 30, 100, 0, 50]
+// let key
+// for (word of str){
+// const key = word.split('').sort().join('');
+// console.log(key)
+// }
+
+
+
+ function groupAnagrams(strs) {
+  const map = {};
+
+  for (let word of strs) {
+    const key = word.split('').sort().join(''); // e.g., 'eat' → 'aet'
+    
+    if (!map[key]) {
+      map[key] = [];
+    }
+
+    map[key].push(word);
+  }
+
+  console.log(Object.values(map))
+  return Object.values(map);
+}
+
+const result = groupAnagrams(str);
+console.log(result);
+

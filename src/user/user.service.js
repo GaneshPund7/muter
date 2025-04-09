@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const seckretKey = "GaneshBhai"
 const randomstring = require('randomstring');
 
 async function createToken(payload, seckretKey) {    
@@ -7,9 +8,10 @@ async function createToken(payload, seckretKey) {
     return token;
 }
 
-async function verifyToken(token, seckretKey ) {
-    jwt.verify(token,seckretKey)    
-
+async function verifyToken(req, res, next){
+    const token = req.headers.authorization.split(' ')[1]
+    jwt.verify(token, seckretKey);
+    next()
 }
 
 async function encryptPassword(password) {
@@ -20,7 +22,6 @@ async function encryptPassword(password) {
     } catch (error) {
         return res.status(400).send("Somthing went wrong..!")
     }
-
 }
 
 async function decryptpassword(password, encPassword) {
@@ -58,4 +59,4 @@ async function checkAge(req, res, next) {
     }
     next()
 }
-module.exports = { encryptPassword, decryptpassword, createToken ,generateOTP}
+module.exports = { encryptPassword, decryptpassword, createToken , verifyToken, generateOTP}

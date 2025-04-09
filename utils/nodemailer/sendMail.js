@@ -11,17 +11,19 @@ const createTransport = nodemailer.createTransport({
         pass: "nlyt xcke kumx atlh",
     },
 });
+
+
 async function sendMail(email, password) {
     try {
         await createTransport.sendMail({
-            to: email,
+            to: email.join(","),
             from: "ganesh.pund@nimapinfotech.in",
             subject: "Nimap Infotech OTP",
             html: `<p>Your user Name is ${email} and OTP is <b> ${password} </b></p>
             <p> dont share otp with any one </p>
             <p>thanks and regard </p>
-            <b>Nimap Infotech</b>`,
-
+            <b style="color:red">Nimap Infotech</b>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Droste_Cacao_Alcalinise_blikje%2C_foto4.JPG/330px-Droste_Cacao_Alcalinise_blikje%2C_foto4.JPG"></img>`,
         })
     } catch (error) {
         console.log("Mail not send", error.message);

@@ -1,6 +1,7 @@
-const userModal = require("../user/user.modal");
-const { decryptpassword, createToken } = require("../user/user.service");
+const userModal = require("../../user/user.modal");
+const { decryptpassword, createToken } = require("../../user/user.service");
 const seckretKey = "GaneshBhai";
+
 async function verifyUser(req, res){
     const { email, password } = req.body;
     const getUser = await userModal.findOne({email});
@@ -19,4 +20,4 @@ async function verifyUser(req, res){
     }
 }
 
-module.exports = verifyUser
+module.exports = verifyUser;

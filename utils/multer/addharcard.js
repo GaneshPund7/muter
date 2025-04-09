@@ -8,5 +8,5 @@ const storage = multer.diskStorage({
         cb(null, file.originalname.split('.')[0] + '.' + file.originalname.split('.').pop());
     }
 });
-exports.filename = multer({ storage: storage }).single('file');
+exports.filename = multer({ storage: storage }).array('file', 2);
  

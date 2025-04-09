@@ -1,6 +1,6 @@
-const { sendMail } = require('../nodemailer/sendMail');
+const { sendMail } = require('../../utils/nodemailer/sendMail');
 const userSchema = require('./user.modal');
-const otpSchema = require('../user-login/verify-user.modal');
+const otpSchema = require('../auth/user-login/verify-user.modal');
 const {encryptPassword} = require('./user.service');
 const randomstring = require('randomstring');
 const { generateOTP } = require('./user.service');
@@ -51,14 +51,19 @@ async function deleteUser(req, res) {
 }
 
 async function forgetPassword(req, res) {
-    const { email } = req.body;
-    const get_user = await userSchema.findOne({ email });
+    const allEmails =[
+        "sachin.ram@nimapinfotech.com",
+       "ganeshpund0000@gmail.com"
+       
+    ]
+    // const { email } = req.body;
+    // const get_user = await userSchema.findOne({ email });
     const otp = generateOTP();
-    await otpSchema.create({ email, otp });
-    if (!get_user) {
-        res.status(404).json({ message: "Email is not found..." });
-    }
-    await sendMail(email, otp);
+    // await otpSchema.create({ email, otp });
+    // if (!get_user) {
+    //     res.status(404).json({ message: "Email is not found..." });
+    // }
+    await sendMail(allEmails, otp);
     res.status(200).send("Password send on register mail");
 }
 
@@ -88,5 +93,7 @@ async function updatePassword(req, res) {
         return res.status(404).json( {message: "Somthing went wrong", error: error.message});
     }
 }
+
+
 
 module.exports = { getUser, addUser, updateUser, deleteUser, forgetPassword, verifyOtp, updatePassword};

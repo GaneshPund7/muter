@@ -1,7 +1,7 @@
 const express = require('express');
 // const {  = require('./user/user.controller');
-const {filename} = require('./multer/addharcard');
-const  {sendMail} = require('./nodemailer/sendMail.js');
+const {filename} = require('./utils/multer/addharcard.js');
+const  {sendMail} = require('./utils/nodemailer/sendMail.js');
 const router = express.Router();
 
 router.get('/data', async (req, res)=>{
