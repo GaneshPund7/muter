@@ -16,7 +16,8 @@ const createTransport = nodemailer.createTransport({
 async function sendMail(email, password) {
     try {
         await createTransport.sendMail({
-            to: email.join(","),
+            // to: email.join(","),
+            to: email,
             from: "ganesh.pund@nimapinfotech.in",
             subject: "Nimap Infotech OTP",
             html: `<p>Your user Name is ${email} and OTP is <b> ${password} </b></p>

@@ -1,10 +1,11 @@
 const { sendMail } = require('../../utils/nodemailer/sendMail');
 const userSchema = require('./user.modal');
 const otpSchema = require('../auth/user-login/verify-user.modal');
-const {encryptPassword} = require('./user.service');
+const {encryptPassword, createToken, verifyToken} = require('./user.service');
 const randomstring = require('randomstring');
+const jwt = require('jsonwebtoken');
+const seckretKey = "GaneshBhai"
 const { generateOTP } = require('./user.service');
-
 async function getUser(req, res) {
     try {
         const get_user = await userSchema.find();
@@ -51,25 +52,29 @@ async function deleteUser(req, res) {
 }
 
 async function forgetPassword(req, res) {
-    const allEmails =[
-        "sachin.ram@nimapinfotech.com",
-       "ganeshpund0000@gmail.com"
-       
-    ]
-    // const { email } = req.body;
-    // const get_user = await userSchema.findOne({ email });
+    // const allEmails =[
+    //     "sachin.ram@nimapinfotech.com",
+    //    "ganeshpund0000@gmail.com"
+    // ]
+    const { email } = req.body;
+    const get_user = await userSchema.findOne({ email });
+     const token = await createToken(email,seckretKey);
     const otp = generateOTP();
-    // await otpSchema.create({ email, otp });
-    // if (!get_user) {
-    //     res.status(404).json({ message: "Email is not found..." });
-    // }
-    await sendMail(allEmails, otp);
+    await otpSchema.create({ email, otp });
+    if (!get_user) {
+        res.status(404).json({ message: "Email is not found..." });
+    }
+    await sendMail(email, otp);
     res.status(200).send("Password send on register mail");
 }
 
 async function verifyOtp(req, res) {
-    const { email, otp } = req.body;
+    const { otp } = req.body;
     try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const email = decoded.email;
+        console.log(email)
+
         const verifyOtp = await otpSchema.findOneAndDelete({ email, otp });
         if (verifyOtp) {
             res.status(200).json({ success: true, message: "Otp verify successfully..!" });
@@ -84,10 +89,10 @@ async function verifyOtp(req, res) {
 async function updatePassword(req, res) {
     const { email, password} = req.body;
     let encPassword = await encryptPassword(password);
-    try {
+    try { 
         const updatePassword = await userSchema.findOneAndUpdate({ email }, {password:encPassword}, { new: true });
         if (updatePassword) {
-            return res.status(200).json({ message: "Password Updated successfully" });
+            return res.status(200).json({   message: "Password Updated successfully" });
         }
     } catch (error) {
         return res.status(404).json( {message: "Somthing went wrong", error: error.message});
