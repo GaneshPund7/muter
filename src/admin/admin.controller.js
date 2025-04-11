@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const seckretKey = "GaneshBhai"
 const { generateOTP } = require('./user.service');
 
-async function getUser(req, res) {
+async function getAdmin(req, res) {
     try {
         const get_user = await userSchema.find();
         return res.status(200).json({ message: "Data fetch successfuly..!", get_user });
@@ -16,14 +16,14 @@ async function getUser(req, res) {
     }
 }
 
-async function addUser(req, res) {
-    const { name, email, password } = req.body;
+async function addAdmin(req, res) {
+    const { adminName, adminEmail, password } = req.body;
     let encPassword = await encryptPassword(password);
     try {
-        if (!name || !email || !password) {
+        if (!adminName || !adminEmail || !password) {
             return res.status(400).send("All field are required..!");
         } else {
-            const addUser = await userSchema.create({ name, email, password:encPassword});
+            const addUser = await userSchema.create({ adminName, adminEmail, password:encPassword});
             return res.status(200).json({ message: "Data added successfuly..!", addUser })
         }
     } catch (error) {
@@ -31,22 +31,22 @@ async function addUser(req, res) {
     }
 }
 
-async function updateUser(req, res) {
+async function updateAdmin(req, res) {
     const { id } = req.params;
     if (!id) {
         return res.status(400).send("Invalid Id Please try agian");
     }
     const updateUser = await userSchema.findOneAndUpdate({ _id: id }, req.body, { new: true });
 
-    return res.status(200).json("User Updated successfully..!", updateUser);
+    return res.status(200).json("Admin Updated successfully..!", updateUser);
 
 }
 
-async function deleteUser(req, res) {
+async function deleteAdmin(req, res) {
     const { id } = req.params;
     try {
         await userSchema.findOneAndRemove({ _id: id });
-        res.status(200).send("User Deleted Successfuly");
+        res.status(200).send("Admin Deleted Successfuly");
     } catch (error) {
         return res.status(404).send("Somthing wend wrong")
     }
@@ -104,4 +104,4 @@ async function updatePassword(req, res) {
 
 
 
-module.exports = { getUser, addUser, updateUser, deleteUser, forgetPassword, verifyOtp, updatePassword};
+module.exports = { getAdmin, addAdmin, updateAdmin, deleteAdmin, forgetPassword, verifyOtp, updatePassword};

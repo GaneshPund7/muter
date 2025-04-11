@@ -2,7 +2,7 @@ const userModal = require("../../user/user.modal");
 const { decryptpassword, createToken } = require("../../user/user.service");
 const seckretKey = "GaneshBhai";
 
-async function verifyUser(req, res) {
+async function verifyAdmin(req, res) {
     const { email, password } = req.body;
 
     try {
@@ -26,4 +26,4 @@ async function verifyUser(req, res) {
     }
 }
 
-module.exports = verifyUser;
+module.exports = verifyAdmin;

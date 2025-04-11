@@ -9,6 +9,7 @@ const os = require('os');
 const bodyParser = require('body-parser');
 const router = require('./router');
 const route = require('./src/user/user.route');
+const productRoute = require('./src/Products/product.route');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -20,7 +21,8 @@ app.use(express.json())
 const cpus = os.cpus().length;
 // app.use(router);
 app.use('/sign-up',route);
-app.use('/product', router);
+app.use('/admin', router);
+app.use('/product', productRoute);
 if (cluster.isPrimary) {
     console.log(`Worker is ${process.pid} is running`);
     for (let i = 0; i < cpus; i++) {

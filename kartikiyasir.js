@@ -36,12 +36,6 @@ function swap() {
     console.log(`The value of a is ${a} ,The value of b is${b}`);
 }
 // swap()
-
-
-
-
-
-
 //  Find odd and even no
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function odd(a) {
@@ -73,7 +67,7 @@ function palindrome(str) {
     }
     return false
 }
- console.log(palindrome(names));
+console.log(palindrome(names));
 
 
 
@@ -211,9 +205,9 @@ console.log(studentobj)
 
 console.log("-------------------------------------")
 // Third method
-let name2 = "Pooja";
+let name4 = "Pooja";
 let nameobj = {}
-for (let myname of name2) {
+for (let myname of name4) {
     nameobj[myname] = (nameobj[myname] || 0) + 1;
 }
 console.log(nameobj)
@@ -221,8 +215,8 @@ console.log(nameobj)
 // {name: pooja}
 let myNameobj = {};
 
-myNameobj.name = name2
-myNameobj.name1 = name2
+myNameobj.name = name4
+myNameobj.name1 = name4
 console.log(myNameobj);
 
 
@@ -290,8 +284,8 @@ function sumOfPrimeSquares(n) {
     let num = 2;
     let sum = 0;
 
-    while (count < n){
-        if (isPrime(num)){
+    while (count < n) {
+        if (isPrime(num)) {
             sum += num * num;
             count++;
         }
@@ -301,7 +295,7 @@ function sumOfPrimeSquares(n) {
 }
 // console.log(sumOfPrimeSquares(4));
 
- 
+
 //  [80, 60, 10, 50, 30, 100, 0, 50]
 // let key
 // for (word of str){
@@ -309,21 +303,21 @@ function sumOfPrimeSquares(n) {
 // console.log(key)
 // }
 
- function groupAnagrams(strs) {
-  const map = {};
+function groupAnagrams(strs) {
+    const map = {};
 
-  for (let word of strs) {
-    const key = word.split('').sort().join(''); // e.g., 'eat' → 'aet'
-    
-    if (!map[key]) {
-      map[key] = [];
+    for (let word of strs) {
+        const key = word.split('').sort().join(''); // e.g., 'eat' → 'aet'
+
+        if (!map[key]) {
+            map[key] = [];
+        }
+
+        map[key].push(word);
     }
 
-    map[key].push(word);
-  }
-
-  console.log(Object.values(map))
-  return Object.values(map);
+    console.log(Object.values(map))
+    return Object.values(map);
 }
 
 const result = groupAnagrams(str);
@@ -331,177 +325,177 @@ console.log(result);
 
 
 
-4. Find the reverse of the string.
-let name = "madam"
+// 4. Find the reverse of the string.
+let name3 = "madam"
 
-function reverstr(str){
+function reverstr(str) {
     let reverseStr = ""
-for(let i=str.length -1; i>=0;i--){
-    reverseStr += str[i]
-}
-return reverseStr
+    for (let i = str.length - 1; i >= 0; i--) {
+        reverseStr += str[i]
+    }
+    return reverseStr
 }
 
-5. WAP to find missing elements from the array?
-let arr = [2,3,6,8,9,14];
+// 5. WAP to find missing elements from the array?
+let arr1 = [2, 3, 6, 8, 9, 14];
 let missElement = []
-let largeNo = Math.max(...arr);
-let smallNo = Math.min(...arr);
+let largeNo = Math.max(...arr1);
+let smallNo = Math.min(...arr1);
 
-for(let i = smallNo; i<=largeNo; i++){
-  if(arr.indexOf(i)< 0){
-      missElement.push(i)
-  }
+for (let i = smallNo; i <= largeNo; i++) {
+    if (arr1.indexOf(i) < 0) {
+        missElement.push(i)
+    }
 }
 console.log(missElement)
 
-6. WAP to find the given string is Palindrome or not.
+// 6. WAP to find the given string is Palindrome or not.
 
-function polindrom(pStr){
-    if(reverstr(pStr) === pStr){ 
+function polindrom(pStr) {
+    if (reverstr(pStr) === pStr) {
         return true
-}else{
-    return false
-}
+    } else {
+        return false
+    }
 }
 console.log(polindrom(name));
 
-11. Find prime numbers from 1 ....n 
-let arr = [1,2,4,56,6,7,8,9,4];
+// 11. Find prime numbers from 1 ....n 
+let arr3 = [1, 2, 4, 56, 6, 7, 8, 9, 4];
 
-function IsPrime(num){
-    if(num < 2) return false
-for(let i = 2; i<= num /2; i++){
-    if(num % i === 0) return false
-}
- return true
+function IsPrime(num) {
+    if (num < 2) return false
+    for (let i = 2; i <= num / 2; i++) {
+        if (num % i === 0) return false
+    }
+    return true
 }
 console.log(IsPrime(6))
 
-Add sum of first prime no
- function aaditionOfFirstPrimeNo(numb){
-     let count = 0
-     let num = 2;
-     let sum = 0
-    
-    while(count < numb){
-        if(IsPrime(num)){
+// Add sum of first prime no
+function aaditionOfFirstPrimeNo(numb) {
+    let count = 0
+    let num = 2;
+    let sum = 0
+
+    while (count < numb) {
+        if (IsPrime(num)) {
             sum += num * num;
-        count++
+            count++
         }
-    num++
+        num++
     }
     return sum
- }
+}
 console.log(aaditionOfFirstPrimeNo(4))
 
 
-function checkPrimeNo(numb){
-    
-  for(let i = 2; i<=numb / 2; i++){
-      if(numb % i ===0) return false
-  } 
-  return true
+function checkPrimeNo(numb) {
+
+    for (let i = 2; i <= numb / 2; i++) {
+        if (numb % i === 0) return false
+    }
+    return true
 }
 
- function addFirstPrimeNo(numb){
-     let count =0;
-     let sum = 0;
-     let num = 2;
-     while(count < numb){
-         if(checkPrimeNo(num)){
-             sum += num * num
-             count++
-         }
-         num++
-     }
-     return sum
- }
- console.log(addFirstPrimeNo(4))
+function addFirstPrimeNo(numb) {
+    let count = 0;
+    let sum = 0;
+    let num = 2;
+    while (count < numb) {
+        if (checkPrimeNo(num)) {
+            sum += num * num
+            count++
+        }
+        num++
+    }
+    return sum
+}
+console.log(addFirstPrimeNo(4))
 
 
-13. WAP with 2 different logic, to find all duplicate numbers in an array.
+// 13. WAP with 2 different logic, to find all duplicate numbers in an array.
 
-let duplicateArray = [1,2,4,56,6,7,8,9,4,5,1,2];
-function dupElement(arr){
-    let dupArr= []
+let duplicateArray = [1, 2, 4, 56, 6, 7, 8, 9, 4, 5, 1, 2];
+function dupElement(arr) {
+    let dupArr = []
     let n = 3
-   
-    for(let i=0; i<arr.length- 1; i++){
-    for(let j = i + 1; j<arr.length; j++){
-        if(arr[i] === arr[j]){
-            dupArr.push(arr[i])
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+                dupArr.push(arr[i])
+            }
         }
     }
-}
-return dupArr
+    return dupArr
 }
 console.log(dupElement(duplicateArray))
 
 
-Sort arr without using build in method
+// Sort arr without using build in method
 
-let sortArr = [1,2,4,56,6,7,8,9,4,5,1,2];
-function sortArrFun(arr){
-     
-    for(let i=0; i<arr.length- 1; i++){
-    for(let j = i + 1; j<arr.length; j++){
-        if(arr[i] > arr[j]){
-          [[arr[i], arr[j]] = [arr[j], arr[i]]]
+let sortArr = [1, 2, 4, 56, 6, 7, 8, 9, 4, 5, 1, 2];
+function sortArrFun(arr) {
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] > arr[j]) {
+                [[arr[i], arr[j]] = [arr[j], arr[i]]]
+            }
         }
     }
-}
-return arr
+    return arr
 }
 console.log(sortArrFun(sortArr))
 
-17. find the frequency of each and every character in a string and sort it in descending order.
-let name ="Enginner" 
-name = name.toLowerCase();
+// 17. find the frequency of each and every character in a string and sort it in descending order.
+let name2 = "Enginner"
+name2 = name.toLowerCase();
 
-function fName (name){
+function fName(name) {
     let obj = {}
-    for(key of name){
-        if(!obj[key]){
+    for (key of name) {
+        if (!obj[key]) {
             obj[key] = 1
         }
-        else{
+        else {
             obj[key]++
         }
     }
     return obj;
 }
-console.log(fName(name))
+console.log(fName(name2))
 
-19. count lowercase and uppercase
-let name = "Hello world!Q"
+// 19. count lowercase and uppercase
+let name1 = "Hello world!Q"
 output = uppercase = 1, lowercase = 9
 
-function checklandup(name){
+function checklandup(name1) {
     let lowerCase = 0
     let upperCase = 0;
-    for(let i = 0; i< name.length; i++){
-        if(name[i] >="A" && name[i]<="Z"){
+    for (let i = 0; i < name1.length; i++) {
+        if (name1[i] >= "A" && name1[i] <= "Z") {
             upperCase++
-        }else if(name[i] >="a" && name[i]<="z"){
+        } else if (name1[i] >= "a" && name1[i] <= "z") {
             lowerCase++
         }
     }
-    return {lowerCase, upperCase}
+    return { lowerCase, upperCase }
 }
 console.log(checklandup(name));
 
-Find pairs whose sum = 100;
-Logic for above problem?
-What will be the complexity for it?
-Any better solution for the above problem?
+// Find pairs whose sum = 100;
+// Logic for above problem?
+// What will be the complexity for it?
+// Any better solution for the above problem?
 
-let data =[80, 60, 10, 50, 30, 100, 0, 50];
+let data1 = [80, 60, 10, 50, 30, 100, 0, 50];
 let sum = 0;
-for(let i =0; i<data.length; i++){
-    for(let j = i+1; j< data.length; j++){
-        if(data[i] + data[j] ===100){
-         console.log(data[i], data[j])
+for (let i = 0; i < data1.length; i++) {
+    for (let j = i + 1; j < data1.length; j++) {
+        if (data1[i] + data1[j] === 100) {
+            console.log(data1[i], data1[j])
         }
     }
 }
@@ -509,87 +503,87 @@ for(let i =0; i<data.length; i++){
 console.log(decodeURI("%sdfk"));
 
 
-Write a function that counts the number of vowels in a string.
+// Write a function that counts the number of vowels in a string.
 console.log(checkVowels("Ganesaaaaarrrreioooouuuddduu"))
-function checkVowels(str){
-     str =str.toLowerCase();
-      let obj ={ };
-      let vowels = ['a', 'e', 'i', 'o', 'u'];
-      for(strs of str){
-      for(volwes of vowels){
-          if(strs === volwes){
-            if(!obj[strs]){
-                 obj[strs] = 1
-            }else{
-                 obj[strs]++
+function checkVowels(str) {
+    str = str.toLowerCase();
+    let obj = {};
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+    for (strs of str) {
+        for (volwes of vowels) {
+            if (strs === volwes) {
+                if (!obj[strs]) {
+                    obj[strs] = 1
+                } else {
+                    obj[strs]++
+                }
             }
-          }
-      }
-      }
-     return obj
+        }
+    }
+    return obj
 }
 
-Check If Two Arrays Are Equal
+// Check If Two Arrays Are Equal
 
-Compare two arrays (order can matter or not, depending on the version) and return if they are equal.
+// Compare two arrays (order can matter or not, depending on the version) and return if they are equal.
 
-let number = [1,3,4,6,7,9,0,6,4,3];
-let number2 = [1,3,4,6,7,9,0,6,4];
-let numb =true
-for(let i = 0; i<number.length; i++){
-for(let i = 0; i<number2.length; i++){
+let number = [1, 3, 4, 6, 7, 9, 0, 6, 4, 3];
+let number2 = [1, 3, 4, 6, 7, 9, 0, 6, 4];
+let numb = true
+for (let i = 0; i < number.length; i++) {
+    for (let i = 0; i < number2.length; i++) {
 
-      if(number2[i] !==number[i]){
+        if (number2[i] !== number[i]) {
             numb = false
-      }
-}
+        }
+    }
 }
 console.log(numb)
 
 
-Find First Non-Repeating Character
-In "aabbcdde", return "c".
+// Find First Non-Repeating Character
+// In "aabbcdde", return "c".
 
-let strg = "aabbcdde";
+let strgs = "aabbcdde";
 let NonrepitChar = {}
- for (let i=0; i<=strg.length; i++){
-     for(let j= i+ 1; j <strg.length; j++){
-         if(strg[i] !== strg[j]){
-          if(!NonrepitChar[strg[i]]){
-                 NonrepitChar[strg[i]] = 1
-          }else{
-                 NonrepitChar[strg[i]]++
-          }
-           
-         }
-     }
- }
+for (let i = 0; i <= strgs.length; i++) {
+    for (let j = i + 1; j < strgs.length; j++) {
+        if (strgs[i] !== strgs[j]) {
+            if (!NonrepitChar[strgs[i]]) {
+                NonrepitChar[strgs[i]] = 1
+            } else {
+                NonrepitChar[strgs[i]]++
+            }
+
+        }
+    }
+}
 console.log(NonrepitChar);
 
 let strg = "aabbbcddce";
 let freq = {};
 
-First pass: count frequency of each character
- 
-for(let i = 0; i<strg.length; i++){
-    freq[strg[i]] = freq[strg[i]]? ++freq[strg[i]] : 1
-    console.log(   freq[strg[i]])
-}
-console.log( freq)
- 
- for(let j = 0; j< strg.length; j++){
-     if(freq[strg[j]] <= 1){
-         console.log(strg[j])
-         break;
-     }
- }
-console.log(undefined || false || null || 0)
- 
+// First pass: count frequency of each character
 
-function check(n){
-    
-  return  n && 0
- 
+for (let i = 0; i < strg.length; i++) {
+    freq[strg[i]] = freq[strg[i]] ? ++freq[strg[i]] : 1
+    console.log(freq[strg[i]])
+}
+console.log(freq)
+
+for (let j = 0; j < strg.length; j++) {
+    if (freq[strg[j]] <= 1) {
+        console.log(strg[j])
+        break;
+    }
+}
+console.log(undefined || false || null || 0)
+
+
+function check(n) {
+
+    return n - 0
+
 }
 
 console.log(check(1))
@@ -600,9 +594,9 @@ console.log(1);
     let a = 30;
     console.log(a);
     a++
-  function aa () {
+    {
         console.log(a);
-        var a = 30;
+        let a = 30;
     }
     a++
 }

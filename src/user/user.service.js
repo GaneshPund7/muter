@@ -10,7 +10,8 @@ async function createToken(payload, seckretKey) {
 
 async function verifyToken(req, res, next){
     const token = req.headers.authorization.split(' ')[1]
-    jwt.verify(token, seckretKey);
+     jwt.verify(token, seckretKey);
+    // return decoded
     next()
 }
 
