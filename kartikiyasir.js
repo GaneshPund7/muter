@@ -462,7 +462,7 @@ function fName(name) {
         else {
             obj[key]++
         }
-    }
+    }   
     return obj;
 }
 console.log(fName(name2))
@@ -577,17 +577,14 @@ for (let j = 0; j < strg.length; j++) {
         break;
     }
 }
-console.log(undefined || false || null || 0)
+console.log(undefined || false || null || 0 || "hrllo")
 
 
 function check(n) {
-
     return n - 0
-
 }
 
-console.log(check(1))
-
+console.log(check(1));
 
 console.log(1);
 {
@@ -602,7 +599,16 @@ console.log(1);
 }
 console.log(a)
 
+setTimeout(function() {
+    resolve('Resolved!');
+}, 1000);
 
+promise.then(function(value) {
+console.log(value)
+return value;
+}).finally((val)=> {
+console.log(val)
+})
 
 
 
