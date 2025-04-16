@@ -23,7 +23,7 @@ async function addUser(req, res) {
         if (!name || !email || !password) {
             return res.status(400).send("All field are required..!");
         } else {
-            const addUser = await userSchema.create({ name, email, password:encPassword});
+            const addUser = await userSchema.create({ name, email, password: encPassword});
             return res.status(200).json({ message: "Data added successfuly..!", addUser })
         }
     } catch (error) {
@@ -101,7 +101,4 @@ async function updatePassword(req, res) {
         return res.status(404).json({message: "Somthing went wrong", error: error.message});
     }
 }
-
-
-
 module.exports = { getUser, addUser, updateUser, deleteUser, forgetPassword, verifyOtp, updatePassword};

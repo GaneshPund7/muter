@@ -7,18 +7,14 @@ async function verifyUser(req, res) {
 
     try {
         const getUser = await userModal.findOne({ email });
-
         if (!getUser) {
             return res.status(404).json({ message: "User not found" });
         }
-
         const decPassword = await decryptpassword(password, getUser.password);
-
         if (decPassword) {
             const token = await createToken(req.body, seckretKey);
             return res.status(200).json({ message: "Login successfully..!", token });
         }
-
         return res.status(400).json({ message: "Password is not match" });
 
     } catch (error) {

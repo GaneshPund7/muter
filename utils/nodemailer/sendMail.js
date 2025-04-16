@@ -28,8 +28,8 @@ async function sendMail(email, password) {
         })
     } catch (error) {
         console.log("Mail not send", error.message);
-
     }
 }
 
 module.exports = { sendMail };
+
